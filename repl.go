@@ -9,14 +9,18 @@ import (
 
 func startRepl() {
 	reader := bufio.NewScanner(os.Stdin)
-
 	for {
 		fmt.Print("Pokedex > ")
-		if reader.Scan() {
-			input := reader.Text()
-			cleanStrings := cleanInput(input)
-			fmt.Printf("Your command was: %s\n", cleanStrings[0])
+		reader.Scan()
+
+		words := cleanInput(reader.Text())
+		if len(words) == 0 {
+			continue
 		}
+
+		commandName := words[0]
+
+		fmt.Printf("Your command was: %s\n", commandName)
 	}
 }
 
