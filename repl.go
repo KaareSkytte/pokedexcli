@@ -1,6 +1,24 @@
 package main
 
-import "strings"
+import (
+	"bufio"
+	"fmt"
+	"os"
+	"strings"
+)
+
+func startRepl() {
+	reader := bufio.NewScanner(os.Stdin)
+
+	for {
+		fmt.Print("Pokedex > ")
+		if reader.Scan() {
+			input := reader.Text()
+			cleanStrings := cleanInput(input)
+			fmt.Printf("Your command was: %s\n", cleanStrings[0])
+		}
+	}
+}
 
 func cleanInput(text string) []string {
 	output := strings.ToLower(text)
